@@ -1,0 +1,529 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #9a8b7bc9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: #000;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.background-video video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.vignette-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.614) 70%);
+    pointer-events: none; /* Allows clicks to pass through the overlay */
+    z-index: 2; /* Ensures the overlay is on top of the video */
+}
+header {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+nav .logo {
+    width: 200px;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #FF8C00;
+}
+
+.content {
+    margin-top: 100px; /* Adjust this value if needed */
+    flex: 1; /* Allow content to grow and fill available space */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    color: #fde7d0e4;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+form {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px #FFA500;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    color: #FFA500;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #FFA500;
+    border-radius: 5px;
+    background-color: #333;
+    color: #FFA500;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #FF8C00;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FF8C00;
+}
+
+h2 {
+    color: #fbecd7;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#result {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+footer {
+    background-color: #1f1e1e; /* Black background for footer */
+    color: #d7d7d7; /* White text color for footer */
+    padding: 40px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f24d2b; /* Orange color for footer logo */
+}
+
+.footer-section h3 {
+    margin-top: 0;
+    font-size: 25px;
+    color: #f24d2b; /* Orange color for section headings */
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #d7d7d7; /* Orange color for footer links */
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #f24d2b; /* Darker orange on hover */
+}
+
+.footer-section form {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-section input {
+    padding: 10px;
+    border: 1px solid #f24d2b; /* Orange border for input */
+    border-radius: 5px;
+    background-color: #333; /* Dark background for input */
+    color: #f24d2b; /* Orange text color for input */
+}
+
+.footer-section button {
+    padding: 10px;
+    background-color: #f24d2b; /* Orange button background */
+    color: #000; /* Black button text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footer-section button:hover {
+    background-color: #f24d2b; /* Darker orange on hover */
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #333; /* Dark border for bottom */
+    padding-top: 20px;
+    width: 100%;
+    text-align: center;
+    color: #f24d2b; /* Orange text color for footer bottom */
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.day {
+    background-color: rgba(255, 165, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;  /* Align text to the left */
+    color: #FFA500;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;  /* Position relative for absolute positioning of the date */
+}
+
+.day .date {
+    font-size: 12px;  /* Make date smaller */
+    color: #fffdf9;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.day .value {
+    font-size: 18px;
+    color: #e3c793;
+    margin-top: 20px;  /* Add some space from the top */
+    display: block;  /* Ensure the value is a block element */
+}
+.logo-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: Right; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    background-color: rgba(63, 63, 63, 0.381);
+    width: 100%;
+
+
+}
+
+.logo-container p {
+    margin-right: 10px; /* Adjust spacing between "Sponsored by" text and logos */
+    font-weight: bold; /* Optional: Make text bold */
+    
+}
+
+.logo {
+    width: 120px; /* Adjust this value to the desired size */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px; /* Optional: Adjust spacing between logos */
+    
+}
+.video-container {
+    position: relative;
+    width: 90%;
+    height: 80vh; /* Adjust height as needed */
+    max-width: 600px; /* Optional: limit the maximum width */
+    max-height: 400px;
+    overflow: hidden; /* Hide overflow to prevent scrolling */
+    z-index: 10; /* Ensure the video container is on top */
+}
+
+.animated-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%; /* Ensure the video fills the entire container */
+    object-fit: cover; /* Maintain aspect ratio and cover entire container */
+    z-index: -1;
+}
+/* Base styles for the box container */
+.box-container {
+    display: flex;
+    justify-content: space-around; /* Space boxes evenly */
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+/* Direct animation for testing */
+.box {
+    width: 200px;
+    height: 200px;
+    background: rgba(253, 174, 96, 0.281); /* Transparent black */
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 4px 8px #0a0908;
+    margin: 0 15px; /* Space out the boxes */
+    transition: transform 0.3s, opacity 0.3s;
+    animation: fadeInLeft 1s both; /* Apply animation directly */
+}
+.box-icon {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Maintain aspect ratio */
+    margin-bottom: 10px; /* Space between icon and text */
+}
+
+/* Animation keyframes for different directions */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply specific animations with a slower duration */
+.fadeInLeft {
+    animation: fadeInLeft 2.5s both; /* Slower animation */
+}
+
+.fadeInRight {
+    animation: fadeInRight 2.5s both; /* Slower animation */
+}
+
+.fadeInUp {
+    animation: fadeInUp 2.5s both; /* Slower animation */
+}
+
+
+
+
+
+/* CSS to style the transparent black container */
+.text-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Black with 70% opacity */
+    color: rgba(255, 255, 255, 0.753); /* Text color */
+    padding: 20px; /* Padding inside the container */
+    border-radius: 20px; /* Rounded corners */
+    max-width: 2000px; /* Optional: limits the width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: adds a shadow */
+    font-size: 130%;
+}
+/* CSS to style the highlighted text */
+.highlight {
+    display: inline-block;
+    background-image: linear-gradient(270deg, rgba(255, 235, 222, 0.853), rgb(255, 106, 0)); /* Example colors */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 3px solid rgb(255, 119, 0); /* Example color for border */
+    padding-left: 10px; /* Optional: adds space between text and border */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container for video and chat box */
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align video and chat box on the same level */
+    width: 85%;
+    padding: 50px;
+    background-color: #161616f3;
+    border-radius: 20px;
+    
+
+}
+
+
+
+/* Chat box styling */
+.chat-box {
+    flex: 0 0 60%; /* Chat box takes up 40% of the container width */
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: scroll; /* Enable vertical scrolling */
+    max-height: 400px; /* Set a fixed height for the chat area */
+    background-color: #333; /* Match the chat box background */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; 
+    
+}
+
+/* Chat header */
+.chat-header {
+    background-color: #2c2b2b;
+    padding: 20px;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    position: sticky;
+    top: 0; /* Stick the header to the top of the chat box */
+   }
+
+.user-message {
+    color: white;
+    background-color: #7f7f7f;
+    padding: 10px 15px; /* Adjust padding for a better appearance */
+    margin: 10px;
+    border-radius: 20px 20px 0 20px; /* Rounded corners */
+    max-width: 70%;
+    align-self: flex-end; /* Aligns user messages to the right */
+    text-align: right;
+    word-wrap: break-word;
+    display: inline-block;
+
+}
+
+.bot-message {
+    color: #f2772b;
+    background-color: #333;
+    padding: 10px 15px; /* Adjust padding for a better appearance */
+    margin: 10px;
+    border-radius: 20px 20px 20px 0; /* Rounded corners */
+    max-width: 70%;
+    align-self: flex-start; /* Aligns bot messages to the left */
+    text-align: left;
+    word-wrap: break-word;
+    
+}
+
+
+/* Chat input area */
+.chat-input {
+    display: flex;
+    padding: 20px;
+    background-color: #444;
+}
+
+.chat-input input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #555;
+    color: white;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background-color: #f2772b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+.chat-input button:hover {
+    background-color: #f2772b;
+}

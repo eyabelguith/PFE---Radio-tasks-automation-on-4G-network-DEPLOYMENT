@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Predicted 4G Network Interference</h1>
+<form id="predict-form">
+    <label for="cell_name">CELL'S NAME :</label>
+    <select id="cell_name" name="cell_name">
+        {% for cell in cell_names %}
+        <option value="{{ cell }}">{{ cell }}</option>
+        {% endfor %}
+    </select><br><br>
+    <button type="button" onclick="predict()">Predict</button>
+</form>
+<h2>Predicted Network Interference:</h2>
+<div id="result" class="calendar"></div>
+
+<script>
+    function predict() {
+        const data = {
+            'Cell Name': document.getElementById('cell_name').value
+        };
+
+        fetch('/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById('result');
+            if (data.error) {
+                resultDiv.innerText = data.error;
+            } else {
+                resultDiv.innerHTML = '';
+                data.predictions.forEach(prediction => {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'day';
+                    dayDiv.innerHTML = `<span class="date">${prediction.Date}</span><span class="value">${prediction.Prediction}</span>`;
+                    resultDiv.appendChild(dayDiv);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+{% endblock %}

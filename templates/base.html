@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>AI-MAX</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background-video">
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='Home-1-Banner-Bg.webm') }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <div class="vignette-overlay"></div>
+
+    </div>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='Loader.gif') }}" alt="Logo" class="logo">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home +</a></li>
+                <li><a href="{{ url_for('predict_page') }}">Predict +</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard +</a></li>
+                <li><a href="{{ url_for('recommend') }}">Recommend +</a></li>
+                <li><a href="{{ url_for('details') }}">Details +</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='aimax-logo.png') }}" alt="AI-MAX Logo" class="footer-logo-img">
+                </div>
+                
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>No: Charguia 1</p>
+                <p>eya.belguith@esprit.tn</p>
+                <p>+216 58 913 277</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">chat</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>A predictive model + recommendation system.</p>
+                <form>
+                    <input type="email" placeholder="Your E-mail">
+                    <button type="submit">></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Orange. All rights reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

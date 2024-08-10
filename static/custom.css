@@ -1,0 +1,67 @@
+body {
+    background-color: transparent !important;
+}
+
+.dbc-container,
+.dbc-row,
+.dbc-col,
+.card,
+.navbar,
+.footer,
+.content {
+    background-color: transparent !important;
+}
+ 
+
+
+.container {
+    background-color: rgba(0, 0, 0, 0.544);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+
+
+.main-panel {
+    background-color: rgba(255, 0, 0, 0.012);
+    padding: 20px;
+}
+
+.date-picker .DateInput_input,
+.dropdown .Select__control {
+    background-color: rgba(28, 28, 28, 0.492);
+    color: rgba(0, 0, 0, 0.432);
+}
+
+.date-picker .DateInput_input__focused,
+.dropdown .Select__control--is-focused {
+    border: 1px solid rgba(0, 0, 0, 0.462);
+}
+
+.map-graph {
+    height: 200px;
+    height: 450px;
+    
+}
+
+
+.card-title {
+    color: rgba(92, 87, 87, 0.153);
+    font-size: 1.5em;
+}
+
+.card-value {
+    color: yellow;
+    font-size: 2em;
+}
+
+.graph-title {
+    color: rgb(0, 0, 0);
+}
+.centered-figure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

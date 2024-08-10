@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>How to fix ?</h1>
+
+<div class="chat-container">
+    <div class="chat-box">
+        <div class="chat-header">AI-max bot</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="How can I help you today..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+    <div class="video-container">
+        <video autoplay muted loop class="animated-background">
+            <source src="{{ url_for('static', filename='slider-2.webm') }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script>
+    document.getElementById('send-btn').addEventListener('click', function() {
+        let input = document.getElementById('user-input').value;
+        let chatMessages = document.getElementById('chat-messages');
+        
+        // Display user message
+        let userMessage = document.createElement('div');
+        userMessage.textContent = input;
+        userMessage.className = 'user-message';
+        chatMessages.appendChild(userMessage);
+
+        // Clear the input
+        document.getElementById('user-input').value = '';
+
+        // Send the message to the server and get the bot's response
+        fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: input })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display bot response
+            let botMessage = document.createElement('div');
+            botMessage.textContent = data.response;
+            botMessage.className = 'bot-message';
+            chatMessages.appendChild(botMessage);
+            
+            // Scroll to the bottom of the chat
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+{% endblock %}

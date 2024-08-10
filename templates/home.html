@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Using Trending Technologies</h1>
+<h1>We Developed The Best AI Based Application,</h1>
+<h1>That Will Make The 4G Network Management Easier and Efficient</h1>
+
+<div class="box-container">
+    <div class="box prediction-box animated fadeInLeft">
+        <img src="{{ url_for('static', filename='prediction.png') }}" alt="Prediction Icon" class="box-icon">
+        <div class="box-text">Prediction</div>
+    </div>
+    <div class="box dashboard-box animated fadeInUp">
+        <img src="{{ url_for('static', filename='dashboard.png') }}" alt="Dashboard Icon" class="box-icon">
+        <div class="box-text">Dashboard</div>
+    </div>
+    <div class="box recommendation-box animated fadeInRight">
+        <img src="{{ url_for('static', filename='recommendation.png') }}" alt="Recommendation Icon" class="box-icon">
+        <div class="box-text">Recommendation</div>
+    </div>
+</div>
+
+<div class="logo-container">
+    <p>Sponsored by:</p>
+    <div class="logo-wrapper">
+        <img src="{{ url_for('static', filename='orange-logo.png') }}" alt="Orange Logo" class="logo">
+        <img src="{{ url_for('static', filename='esprit-logo.png') }}" alt="Esprit Logo" class="logo">
+    </div>
+</div>
+{% endblock %}

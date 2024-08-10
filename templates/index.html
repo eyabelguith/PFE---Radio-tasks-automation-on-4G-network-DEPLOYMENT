@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Network Interference Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background-video">
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='Home-1-Banner-Bg.webm') }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='Loader.gif') }}" alt="Logo" class="logo">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chat">Chat</a></li>
+                <li><a href="#chat">Dashboard</a></li>
+                <li><a href="#details">Details</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>Predict Network Interference</h1>
+        <form id="predict-form">
+            <label for="cell_name">Cell Name:</label>
+            <select id="cell_name" name="cell_name">
+                {% for cell in cell_names %}
+                <option value="{{ cell }}">{{ cell }}</option>
+                {% endfor %}
+            </select><br><br>
+            <button type="button" onclick="predict()">Predict</button>
+        </form>
+        <h2>Predicted Interference:</h2>
+        <div id="result" class="calendar"></div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 class="footer-logo">AI-MAX</h2>
+                <p>You can contact us at : </p>
+                <div class="social-icons">
+                    <a href="#"><img src="{{ url_for('static', filename='facebook-icon.png') }}" alt="Facebook"></a>
+                    <a href="#"><img src="{{ url_for('static', filename='instagram-icon.png') }}" alt="Instagram"></a>
+                    <a href="#"><img src="{{ url_for('static', filename='twitter-icon.png') }}" alt="Twitter"></a>
+                    <a href="#"><img src="{{ url_for('static', filename='linkedin-icon.png') }}" alt="LinkedIn"></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>No: Charguia 1</p>
+                <p>eya.belguith@esprit.tn</p>
+                <p>+216 58 913 277</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">chat</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>A predictive model + recommendation system.</p>
+                <form>
+                    <input type="email" placeholder="Your E-mail">
+                    <button type="submit">></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Orange. All rights reserved</p>
+        </div>
+    </footer>
+    <script>
+        function predict() {
+            const data = {
+                'Cell Name': document.getElementById('cell_name').value
+            };
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                if (data.error) {
+                    resultDiv.innerText = data.error;
+                } else {
+                    resultDiv.innerHTML = '';
+                    data.predictions.forEach(prediction => {
+                        const dayDiv = document.createElement('div');
+                        dayDiv.className = 'day';
+                        dayDiv.innerHTML = `<span class="date">${prediction.Date}</span><span class="value">${prediction.Prediction}</span>`;
+                        resultDiv.appendChild(dayDiv);
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
